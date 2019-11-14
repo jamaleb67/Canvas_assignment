@@ -1,0 +1,111 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Drawing Area</title>
+<!-- You can add your style here rather than in an external style sheet. -->
+<style>
+	canvas {
+	    border:5px solid #d3d3d3;
+	    background-color: #f1f1f1;
+	    display: block;
+	}
+</style>
+</head>
+<body>
+	<!-- DO NOT MODIFY THIS HTML -->
+	<canvas id = "myCanvas" width = "350" height = "500"  ></canvas>
+	<input type = "color" id = "picker"/>
+<script>
+		document.getElementById("myCanvas").height = window.innerHeight * .8;
+		document.getElementById("myCanvas").width = window.innerwidth * .8;
+
+		var canvas = document.querySelector("#myCanvas");
+		var ctx = myCanvas.getContext("2d");
+		color = 'red';
+
+		myCanvas.width = (window.outerWidth * 0.8);
+		myCanvas.height = (window.outerHeight * 0.8);
+
+		var mouse = {x: 0, y: 0};
+		var penup =0;
+
+// 		myCanvas.addEventListener('mousemove',function(e){
+// 			ctx.beginPath();
+// 			draw(e.offsetX, e.offsetY)
+// 			function draw(x, y){
+// 				ctx.arc(x, y, 10, 0, 2 * Math.PI);
+// 				ctx.fill();
+// 				ctx.fillStyle = color;
+// }
+// })
+//blue, red, green, or yellow respectively.
+		window.addEventListener('keydown', function(e){
+			if (e.key == "b"){
+				color = 'blue';}
+
+			if (e.key == "r"){
+				color = 'red';}
+
+			if (e.key == "g"){
+				color = 'green';}
+
+			if (e.key == "y"){
+				color = 'yellow';}
+
+			if (e.keyCode == 38){
+				penup = 1;
+			console.log("UP ARROW");}
+			if (e.keyCode == 40){
+				penup = 0;}
+})
+
+
+
+
+
+window.addEventListener('keydown', function clearall(e){
+		if (e.code == 'Space'){
+			// ctx.beginPath();
+    	var canvas=document.getElementById("myCanvas");
+    	var context=myCanvas.getContext("2d");
+    	ctx.clearRect(0,0,myCanvas.width,canvas.height);}
+})
+		window.addEventListener('keydown',function(e) {
+			if (e.code == '25') {
+				var canvas=document.getElementById("myCanvas");
+				var context=myCanvas.getContext("2d");
+				ctx.closePath();
+			}
+		})
+
+
+		myCanvas.addEventListener('mousemove', function(e){
+					console.log(e);
+					if (penup == 0){
+						ctx.beginPath();
+						draw(e.offsetX, e.offsetY)
+						function draw(x, y){
+							ctx.arc(x, y, 10, 0, 2 * Math.PI)
+							ctx.fillStyle = color
+							ctx.fill();
+						}
+					}
+					if (penup == 1){
+						console.log("pen up")
+					}
+				})
+		var color_picker = document.getElementById("picker").value;
+		picker.addEventListener(
+				"change", function(){
+					color_picker = this.value;
+					console.log(color_picker);
+					color = color_picker;
+				}
+		)
+</script>
+
+
+</body>
+</html>
